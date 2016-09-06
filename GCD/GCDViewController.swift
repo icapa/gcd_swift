@@ -53,26 +53,21 @@ class GCDViewController: UIViewController {
         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    typealias completionClosuse = (UIImage)->()
+   
+    func withImage(_ image: UIImage, completion : completionClosuse){
+        DispatchQueue.global(qos: .userInitiated).async {
+            do{
+                let data = try Data (contentsOf: self.url)
+                let img = UIImage(data: data)!
+                // hemos terminado, toca ejecutar la clausura
+                // la clasusura de finalizacion siempre en cola principal
+                DispatchQueue.main.async {
+                    completion(img)
+                }
+            }catch{
+                print("la cagamos")
+            }
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
