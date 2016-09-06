@@ -12,13 +12,19 @@ class GCDViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBAction func updateAlpha(_ sender: UISlider) {
+        let value : CGFloat = CGFloat(sender.value)
+        imageView.alpha = value
     }
+    
     @IBAction func actorDownload(_ sender: AnyObject) {
     }
+    
     @IBAction func asyncDownload(_ sender: AnyObject) {
     }
+    
     @IBAction func syncDownload(_ sender: AnyObject) {
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
