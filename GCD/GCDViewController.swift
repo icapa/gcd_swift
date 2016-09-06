@@ -22,6 +22,24 @@ class GCDViewController: UIViewController {
     }
     
     @IBAction func asyncDownload(_ sender: AnyObject) {
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            var data : Data
+            do{
+                try data = Data(contentsOf: self.url)
+                DispatchQueue.main.async {
+                    self.imageView.image = UIImage(data: data)
+                }
+                
+            }catch{
+                print("Se jodió el invento")
+            }
+            
+        }
+        
+        
+         
+        
     }
     
     @IBAction func syncDownload(_ sender: AnyObject) {
