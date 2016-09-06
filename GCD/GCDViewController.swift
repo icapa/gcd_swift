@@ -10,6 +10,8 @@ import UIKit
 
 class GCDViewController: UIViewController {
 
+    let url = URL(string: "https://orig02.deviantart.net/c3e4/f/2012/194/2/0/house_targaryen_by_archaox-d574ytp.jpg")!
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBAction func updateAlpha(_ sender: UISlider) {
         let value : CGFloat = CGFloat(sender.value)
@@ -23,6 +25,14 @@ class GCDViewController: UIViewController {
     }
     
     @IBAction func syncDownload(_ sender: AnyObject) {
+        var data : Data
+        do{
+            try data = Data(contentsOf: url)
+            imageView.image = UIImage(data: data)
+        }catch{
+            print("Se jodió el invento")
+        }
+        
     }
     
     override func viewDidLoad() {
